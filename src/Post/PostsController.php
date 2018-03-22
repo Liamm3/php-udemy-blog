@@ -11,11 +11,19 @@ class PostsController
         $this->postsRepository = $postsRepository;
     }
 
+    public function render($view, $params)
+    {
+        extract($params);
+        include __DIR__ . "/../../views/{$view}.php";
+    }
+
     public function index()
     {
         $posts = $this->postsRepository->fetchPosts();
 
-        include __DIR__ . "/../../views/post/index.php";
+        $this->render("post/index", [
+            "posts" => $posts
+        ]);
     }
 
     public function show()
@@ -23,6 +31,8 @@ class PostsController
         $id = $_GET["id"];
         $post = $this->postsRepository->fetchPost($id);
 
-        include __DIR__ . "/../../views/post/post.php";
+        $this->render("post/post", [
+            'post' => $post
+        ]);
     }
 }
