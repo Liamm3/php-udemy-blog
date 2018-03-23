@@ -2,7 +2,9 @@
 
 namespace App\Post;
 
-class PostsController
+use App\Core\Controller;
+
+class PostsController extends Controller
 {
     private $postsRepository;
 
