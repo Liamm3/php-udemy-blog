@@ -7,10 +7,12 @@ use App\Core\Controller;
 class PostsController extends Controller
 {
     private $postsRepository;
+    private $commentsRepository;
 
-    public function __construct(PostsRepository $postsRepository)
+    public function __construct(PostsRepository $postsRepository, CommentsRepository $commentsRepository)
     {
         $this->postsRepository = $postsRepository;
+        $this->commentsRepository = $commentsRepository;
     }
 
     public function render($view, $params)
@@ -33,8 +35,12 @@ class PostsController extends Controller
         $id = $_GET["id"];
         $post = $this->postsRepository->find($id);
 
+
+        $comments = $this->commentsRepository->allByPost($id);
+
         $this->render("post/post", [
-            'post' => $post
+            "post" => $post,
+            "comments" => $comments
         ]);
     }
 }
