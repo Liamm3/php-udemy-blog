@@ -21,4 +21,10 @@
   <?php endforeach; ?>
 </ul>
 
+<form method="post" action="post?id=<?php echo $post["id"]; ?>">
+  <textarea name="content" class="form-control"></textarea>
+  <br>
+  <input type="submit" value="Send" class="btn btn-primary">
+</form>
+
 <?php include __DIR__ . "/../layout/footer.php" ?>

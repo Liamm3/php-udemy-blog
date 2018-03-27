@@ -17,6 +17,19 @@ class CommentsRepository extends Repository
         return "App\\Post\\CommentModel";
     }
 
+    public function insertForPost($postId, $content)
+    {
+        $table = $this->getTableName();
+        $model = $this->getModelName();
+
+        $statement = $this->pdo->prepare("INSERT INTO `$table` (`content`, `post_id`) VALUES (:content, :postId)");
+        $statement->execute([
+            "content" => $content,
+            "postId" => $postId
+        ]);
+
+    }
+
     public function allByPost($id)
     {
         $statement = $this->pdo->prepare("SELECT * FROM `{$this->getTableName()}` WHERE post_id=:id");
