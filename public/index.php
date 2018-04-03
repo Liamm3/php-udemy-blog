@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require __DIR__ . "/../init.php";
 
 $routes = [
@@ -14,6 +15,10 @@ $routes = [
     "/login" => [
         "controller" => "loginController",
         "method" => "login"
+    ],
+    "/dashboard" => [
+        "controller" => "loginController",
+        "method" => "dashboard"
     ]
 ];
 

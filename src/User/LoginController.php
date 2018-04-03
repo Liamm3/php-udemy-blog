@@ -13,6 +13,15 @@ class LoginController extends Controller
         $this->usersRepository = $usersRepository;
     }
 
+    public function dashboard()
+    {
+        if (isset($_SESSION["login"])) {
+            echo "Nutzer ist eingeloggt.";
+        } else {
+            echo "Nutzer ist nicht eingeloggt.";
+        }
+    }
+
     public function login()
     {
         $error = null;
@@ -24,6 +33,8 @@ class LoginController extends Controller
 
             if (!empty($user)) {
                 if (password_verify($password, $user->password)) {
+                    $_SESSION["login"] = $user->username;
+                    session_regenerate_id(true);
                     echo "Login erfolgreich!";
                     die();
                 } else {
