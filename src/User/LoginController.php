@@ -23,7 +23,7 @@ class LoginController extends Controller
             $user = $this->usersRepository->findByUserName($username);
 
             if (!empty($user)) {
-                if ($user->password === $password) {
+                if (password_verify($password, $user->password)) {
                     echo "Login erfolgreich!";
                     die();
                 } else {
