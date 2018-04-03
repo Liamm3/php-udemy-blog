@@ -10,6 +10,10 @@ $routes = [
     "/post" => [
         "controller" => "postsController",
         "method" => "show"
+    ],
+    "/login" => [
+        "controller" => "loginController",
+        "method" => "login"
     ]
 ];
 

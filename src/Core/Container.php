@@ -8,6 +8,7 @@ use App\Post\PostsRepository;
 use App\Post\CommentsRepository;
 use App\Post\PostsController;
 use App\User\UsersRepository;
+use App\User\LoginController;
 
 class Container
 {
@@ -28,6 +29,9 @@ class Container
             },
             "usersRepository" => function() {
                 return new UsersRepository($this->make("pdo"));
+            },
+            "loginController" => function() {
+                return new LoginController($this->make("usersRepository"));
             },
             "pdo" => function() {
                 try {

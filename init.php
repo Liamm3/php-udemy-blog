@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "./autoload.php";
+require __DIR__ . "/autoload.php";
 
 function e($str)
 {
@@ -10,5 +10,3 @@ function e($str)
 $container = new App\Core\Container();
 
 $usersRepository = $container->make("usersRepository");
-var_dump($usersRepository->findByUsername("test"));
-die();
