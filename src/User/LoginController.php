@@ -18,8 +18,14 @@ class LoginController extends Controller
         if (isset($_SESSION["login"])) {
             echo "Nutzer ist eingeloggt.";
         } else {
-            echo "Nutzer ist nicht eingeloggt.";
+            header("Location: login");
         }
+    }
+
+    public function logout()
+    {
+        unset($_SESSION["login"]);
+        header("Location: login");
     }
 
     public function login()
@@ -35,8 +41,8 @@ class LoginController extends Controller
                 if (password_verify($password, $user->password)) {
                     $_SESSION["login"] = $user->username;
                     session_regenerate_id(true);
-                    echo "Login erfolgreich!";
-                    die();
+                    header("Location: dashboard");
+                    return;
                 } else {
                     $error = "Passwörter stimmen nicht überein.";
                 }
