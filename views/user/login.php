@@ -3,6 +3,10 @@
 <br>
 <br>
 
+<?php if (!empty($error)): ?>
+    <p><?php echo $error ?></p>
+<?php endif; ?>
+
 <form method="POST" action="login">
     <div class="form-group">
         <label class="control-label">Benutzername: </label>
