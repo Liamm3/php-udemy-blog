@@ -6,11 +6,11 @@ use App\Core\Controller;
 
 class LoginController extends Controller
 {
-    private $usersRepository;
+    private $loginService;
 
-    public function __construct(UsersRepository $usersRepository)
+    public function __construct(LoginService $loginService)
     {
-        $this->usersRepository = $usersRepository;
+        $this->loginService = $loginService;
     }
 
     public function dashboard()
@@ -24,7 +24,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        unset($_SESSION["login"]);
+        $this->loginService->logout();
         header("Location: login");
     }
 
@@ -35,19 +35,12 @@ class LoginController extends Controller
         if (!empty($_POST["username"]) AND !empty($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            $user = $this->usersRepository->findByUserName($username);
 
-            if (!empty($user)) {
-                if (password_verify($password, $user->password)) {
-                    $_SESSION["login"] = $user->username;
-                    session_regenerate_id(true);
-                    header("Location: dashboard");
-                    return;
-                } else {
-                    $error = "Passwörter stimmen nicht überein.";
-                }
+            if ($this->loginService->attempt($username, $password)) {
+                header("Location: dashboard");
+                return;
             } else {
-                $error = "Der Nutzer konnte nicht gefunden werden.";
+                $error = true;
             }
         }
 

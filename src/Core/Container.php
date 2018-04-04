@@ -9,6 +9,7 @@ use App\Post\CommentsRepository;
 use App\Post\PostsController;
 use App\User\UsersRepository;
 use App\User\LoginController;
+use App\User\LoginService;
 
 class Container
 {
@@ -31,7 +32,10 @@ class Container
                 return new UsersRepository($this->make("pdo"));
             },
             "loginController" => function() {
-                return new LoginController($this->make("usersRepository"));
+                return new LoginController($this->make("loginService"));
+            },
+            "loginService" => function() {
+                return new LoginService($this->make("usersRepository"));
             },
             "pdo" => function() {
                 try {
