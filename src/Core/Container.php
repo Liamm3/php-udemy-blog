@@ -10,6 +10,7 @@ use App\Post\PostsController;
 use App\User\UsersRepository;
 use App\User\LoginController;
 use App\User\LoginService;
+use App\Post\PostsAdminController;
 
 class Container
 {
@@ -19,6 +20,9 @@ class Container
     public function __construct()
     {
         $this->receipts = [
+            "postsAdminController" => function() {
+                return new PostsAdminController($this->make("postsRepository"));
+            },
             "postsController" => function() {
                 return new PostsController($this->make("postsRepository"), $this->make("commentsRepository"));
             },

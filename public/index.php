@@ -23,6 +23,10 @@ $routes = [
     "/dashboard" => [
         "controller" => "loginController",
         "method" => "dashboard"
+    ],
+    "/posts-admin" => [
+        "controller" => "postsAdminController",
+        "method" => "index"
     ]
 ];
 
