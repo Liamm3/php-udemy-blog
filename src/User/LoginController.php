@@ -16,6 +16,7 @@ class LoginController extends Controller
     public function dashboard()
     {
        $this->loginService->check();
+       $this->render("user/dashboard", []);
     }
 
     public function logout()
