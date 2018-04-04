@@ -15,11 +15,7 @@ class LoginController extends Controller
 
     public function dashboard()
     {
-        if (isset($_SESSION["login"])) {
-            echo "Nutzer ist eingeloggt.";
-        } else {
-            header("Location: login");
-        }
+       $this->loginService->check();
     }
 
     public function logout()

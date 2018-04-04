@@ -11,6 +11,16 @@ class LoginService
         $this->usersRepository = $usersRepository;
     }
 
+    public function check()
+    {
+        if (isset($_SESSION["login"])) {
+            return true;
+        } else {
+            header("Location: login");
+            die();
+        }
+    }
+
     public function attempt($username, $password)
     {
         $user = $this->usersRepository->findByUserName($username);
