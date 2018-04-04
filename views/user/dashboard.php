@@ -5,6 +5,9 @@
 
 <ul>
     <li>
+        <a href="posts-admin">Posts verwalten</a>
+    </li>
+    <li>
         <a href="logout">Logout</a>
     </li>
 </ul>

@@ -15,4 +15,16 @@ class PostsRepository extends Repository
     {
         return "App\\Post\\PostModel";
     }
+
+    public function update(PostModel $post)
+    {
+        $table = $this->getTableName();
+
+        $statement = $this->pdo->prepare("UPDATE `{$table}` SET `content`=:content, `title`=:title WHERE `id`=:id ");
+        $statement->execute([
+            "content" => $post->content,
+            "title" => $post->title,
+            "id" => $post->id
+        ]);
+    }
 }
